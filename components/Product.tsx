@@ -1,14 +1,35 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { toast } from "react-hot-toast";
 import Image from "next/image";
 import { ShoppingCartIcon } from "@heroicons/react/outline";
 
 import { urlFor } from "../sanity";
+import basketAtom from "../atoms/basket/atom";
+import {
+  selectBasketTotal,
+  selectGroupedBasket,
+} from "../atoms/basket/selectors";
 
 interface IProps {
   product: Product;
 }
 
 function Product({ product }: IProps) {
+  const [basket, setBasket] = useRecoilState(basketAtom);
+  const total = useRecoilValue(selectBasketTotal);
+  const groupedState = useRecoilValue(selectGroupedBasket(product._id));
+
+  const addItemToBasket = () => {
+    setBasket((prevState) => [...prevState, product]);
+
+    toast.success(`${product.title} added to basket`, {
+      position: "bottom-center",
+    });
+  };
+
+  useEffect(() => console.log(groupedState, [groupedState]));
+
   return (
     <div className="flex h-fit w-[320px] select-none flex-col space-y-3 rounded-xl bg-[#35383C] p-8 md:h-[500px] md:w-[400px] md:p-10">
       <div className="relative h-64 w-full md:h-72">
@@ -24,10 +45,9 @@ function Product({ product }: IProps) {
           <p>{product.title}</p>
           <p>{product.price}</p>
         </div>
-
         <div
           className="flex h-16 w-16 flex-shrink-0 cursor-pointer items-center justify-center rounded-full bg-gradient-to-r from-pink-500 to-violet-500 md:h-[70px] md:w-[70px]"
-          onClick={() => console.log("add item")}
+          onClick={addItemToBasket}
         >
           <ShoppingCartIcon className="h-8 w-8 text-white" />
         </div>
