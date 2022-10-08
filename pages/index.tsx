@@ -5,6 +5,7 @@ import Head from "next/head";
 import Header from "../components/Header";
 import Product from "../components/Product";
 import Landing from "../components/Landing";
+import Basket from "../components/Basket";
 import { fetchCategories } from "../utils/fetchCategories";
 import { fetchProducts } from "../utils/fetchProducts";
 
@@ -26,6 +27,7 @@ const Home: NextPage<IProps> = ({ categories, products }) => {
         <title>Apple</title>
       </Head>
       <Header />
+      <Basket />
       <main className="relative h-[200vh] bg-[#E7ECEE]">
         <Landing />
       </main>

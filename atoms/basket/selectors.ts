@@ -11,8 +11,8 @@ export const selectGroupedBasket = selectorFamily({
     },
 });
 
-export const selectBasketTotal = selector({
-  key: "basketTotal",
+export const selectBasketTotalPrice = selector({
+  key: "basketTotalPrice",
   get: ({ get }) => {
     const state = get(basketAtom);
     return state.reduce(

@@ -2,13 +2,13 @@ import React from "react";
 
 import Image from "next/image";
 import Link from "next/link";
-
 import {
   SearchIcon,
   ShoppingBagIcon,
   UserIcon,
 } from "@heroicons/react/outline";
 import { useRecoilValue } from "recoil";
+
 import basketAtom from "../atoms/basket/atom";
 
 function Header() {

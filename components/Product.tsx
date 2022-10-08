@@ -6,18 +6,14 @@ import { ShoppingCartIcon } from "@heroicons/react/outline";
 
 import { urlFor } from "../sanity";
 import basketAtom from "../atoms/basket/atom";
-import {
-  selectBasketTotal,
-  selectGroupedBasket,
-} from "../atoms/basket/selectors";
+import { selectGroupedBasket } from "../atoms/basket/selectors";
 
 interface IProps {
   product: Product;
 }
 
 function Product({ product }: IProps) {
-  const [basket, setBasket] = useRecoilState(basketAtom);
-  const total = useRecoilValue(selectBasketTotal);
+  const [_, setBasket] = useRecoilState(basketAtom);
   const groupedState = useRecoilValue(selectGroupedBasket(product._id));
 
   const addItemToBasket = () => {
